@@ -1,0 +1,20 @@
+package com.anyi.yygh.service.impl;
+
+import com.anyi.yygh.mapper.HospitalSetMapper;
+import com.anyi.yygh.model.hosp.HospitalSet;
+import com.anyi.yygh.service.HospitalSetService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * <p>
+ * 医院设置表 服务实现类
+ * </p>
+ *
+ * @author anyi
+ * @since 2022-06-10
+ */
+@Service
+public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, HospitalSet> implements HospitalSetService {
+
+}

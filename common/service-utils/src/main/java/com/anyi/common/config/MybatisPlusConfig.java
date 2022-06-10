@@ -8,13 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * MybatisPlus配置类
- *
- * @author qy
+ * @author 安逸i
+ * @version 1.0
  */
-@EnableTransactionManagement //事务处理
 @Configuration
-@MapperScan("com.atguigu.yygh.*.mapper")
+@MapperScan("com.anyi.*.mapper")
+@EnableTransactionManagement //事务处理
 public class MybatisPlusConfig {
 
     /**
@@ -23,13 +22,12 @@ public class MybatisPlusConfig {
     @Bean
     public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
-        // paginationInterceptor.setLimit(你的最大单页限制数量，默认 500 条，小于 0 如 -1 不受限制);
+// paginationInterceptor.setLimit(你的最大单页限制数量，默认 500 条，小于 0 如 -1 不受限制);
         return paginationInterceptor;
     }
 
     /**
      * 乐观锁配置
-     * @return
      */
     @Bean
     public OptimisticLockerInterceptor optimisticLockerInterceptor() {
