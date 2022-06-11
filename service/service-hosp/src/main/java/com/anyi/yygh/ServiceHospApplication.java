@@ -10,8 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = "com.anyi")
-public class HospApplication {
+public class ServiceHospApplication {
     public static void main(String[] args) {
-        SpringApplication.run(HospApplication.class, args);
+        SpringApplication.run(ServiceHospApplication.class, args);
     }
 }

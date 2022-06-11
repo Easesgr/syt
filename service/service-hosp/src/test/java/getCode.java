@@ -1,4 +1,3 @@
-/*
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -9,11 +8,6 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
-*/
-/**
- * @author 安逸i
- * @version 1.0
- *//*
 
 public class getCode {
     public static void main(String[] args) {
@@ -23,24 +17,20 @@ public class getCode {
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
         System.out.println(projectPath);
-        gc.setOutputDir("E:\\code\\yygh-parent\\service\\service-hosp" + "/src/main/java");
+        gc.setOutputDir("E:\\code\\syt\\yygh-parent\\service\\service-cmn" + "/src/main/java");
         gc.setAuthor("anyi");
         gc.setOpen(false); //生成后是否打开资源管理器
         gc.setFileOverride(false); //重新生成时文件是否覆盖
-        */
-/*
-         * mp生成service层代码，默认接口名称第一个字母有 I
-         * UcenterService
-         * *//*
+
 
         gc.setServiceName("%sService"); //去掉Service接口的首字母I
-        gc.setIdType(IdType.ID_WORKER_STR); //主键策略
+        gc.setIdType(IdType.AUTO);//主键策略
         gc.setDateType(DateType.ONLY_DATE);//定义生成的实体类中日期类型
         gc.setSwagger2(true);//开启Swagger2模式
         mpg.setGlobalConfig(gc);
 // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/yygh_hosp?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false");
+        dsc.setUrl("jdbc:mysql://localhost:3306/yygh_cmn?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false");
         dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("root");
@@ -51,13 +41,12 @@ public class getCode {
         pc.setModuleName("yygh"); //模块名
         pc.setParent("com.anyi");
         pc.setController("controller");
-        pc.setEntity("entity");
         pc.setService("service");
         pc.setMapper("mapper");
         mpg.setPackageInfo(pc);
 // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("hospital_set");
+        strategy.setInclude("dict");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的
         // 命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
@@ -71,4 +60,3 @@ public class getCode {
         mpg.execute();
     }
 }
-*/
