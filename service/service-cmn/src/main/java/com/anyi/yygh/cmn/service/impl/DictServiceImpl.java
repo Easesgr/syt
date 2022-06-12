@@ -6,7 +6,9 @@ import com.anyi.yygh.cmn.mapper.DictMapper;
 import com.anyi.yygh.model.cmn.Dict;
 import com.anyi.yygh.cmn.service.DictService;
 import com.anyi.yygh.vo.cmn.DictEeVo;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sun.deploy.net.URLEncoder;
 import org.springframework.beans.BeanUtils;
@@ -77,6 +79,22 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
             EasyExcel.read(file.getInputStream(),DictEeVo.class,new DictListener(baseMapper)).sheet().doRead();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    // 根据dictcode 和value查询
+    @Override
+    public String getNameByParentDictCodeAndValue(String dictCode, String value) {
+        // 判断dictCode是否为空
+        if (StringUtils.isEmpty(dictCode)){
+            // 为空按照value查询
+            Dict one = getOne(new LambdaQueryWrapper<Dict>().eq(Dict::getValue, value));
+            return one.getName();
+        }else {
+            // 按照两个条件查询
+            Dict one = getOne(new LambdaQueryWrapper<Dict>().eq(Dict::getDictCode, dictCode));
+            Dict dict = getOne(new LambdaQueryWrapper<Dict>().eq(Dict::getParentId, one.getId()).eq(Dict::getValue, value));
+            return dict.getName();
         }
     }
 

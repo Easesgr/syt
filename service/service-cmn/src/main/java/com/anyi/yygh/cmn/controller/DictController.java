@@ -4,8 +4,11 @@ package com.anyi.yygh.cmn.controller;
 import com.anyi.common.result.Result;
 import com.anyi.yygh.model.cmn.Dict;
 import com.anyi.yygh.cmn.service.DictService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,6 +52,33 @@ public class DictController {
     public Result importData(MultipartFile file) {
         dictService.importData(file);
         return Result.ok();
+    }
+    @ApiOperation(value = "获取数据字典名称")
+    @GetMapping(value = "/getName/{parentDictCode}/{value}")
+    public String getName(
+            @ApiParam(name = "parentDictCode", value = "上级编码", required = true)
+            @PathVariable("parentDictCode") String parentDictCode,
+
+            @ApiParam(name = "value", value = "值", required = true)
+            @PathVariable("value") String value) {
+        return dictService.getNameByParentDictCodeAndValue(parentDictCode, value);
+    }
+
+    @ApiOperation(value = "获取数据字典名称")
+    @ApiImplicitParam(name = "value", value = "值", required = true, dataType = "Long", paramType = "path")
+    @GetMapping(value = "/getName/{value}")
+    public String getName(
+            @ApiParam(name = "value", value = "值", required = true)
+            @PathVariable("value") String value) {
+        return dictService.getNameByParentDictCodeAndValue("", value);
+    }
+    @ApiOperation("根据dictCode查询父节点信息")
+    @GetMapping("/findByDictCode/{dictCode}")
+    public Result getByDictCode(@PathVariable String dictCode){
+        Dict one = dictService.getOne(new LambdaQueryWrapper<Dict>()
+                .eq(Dict::getDictCode, dictCode));
+        List<Dict> list = dictService.list(new LambdaQueryWrapper<Dict>().eq(Dict::getParentId, one.getId()));
+        return Result.ok(list);
     }
 }
 

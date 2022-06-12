@@ -11,6 +11,7 @@
     <modules>
         <module>common</module>
         <module>service</module>
+        <module>service-client</module>
     </modules>
     <groupId>com.anyi</groupId>
     <artifactId>yygh-parent</artifactId>

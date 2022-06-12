@@ -12,7 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author anyi
  * @since 2022-06-11
  */
-@Mapper
 public interface DictMapper extends BaseMapper<Dict> {
 
 }
