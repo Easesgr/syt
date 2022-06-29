@@ -15,4 +15,10 @@ public interface HospitalService {
     Hospital getHospital(String hoscode);
 
     Page<Hospital> selectPage(Integer page, Integer limit, HospitalQueryVo hospitalQueryVo);
+
+    void updateStatus(String id, Integer status);
+
+    Object show(String id);
+
+    String getHospName(String hoscode);
 }

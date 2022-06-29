@@ -13,6 +13,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -63,6 +65,10 @@ public class Schedule extends BaseMongoEntity {
 
 	@ApiModelProperty(value = "排班状态（-1：停诊 0：停约 1：可约）")
 	private Integer status;
+
+	@ApiModelProperty(value = "其他参数")
+	Map<String ,Object> param = new HashMap<>();
+
 
 	@ApiModelProperty(value = "排班编号（医院自己的排班主键）")
 	@Indexed //普通索引

@@ -66,10 +66,10 @@
     </appender>
 
 
-    <!--    <logger name="com.anyi" level="INFO">-->
-    <!--        <appender-ref ref="CONSOLE" />-->
-    <!--        <appender-ref ref="FILE" />-->
-    <!--    </logger>-->
+        <logger name="com.anyi" level="INFO">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </logger>
 
     <!-- 开发环境和测试环境 -->
     <springProfile name="dev,test">

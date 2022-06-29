@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -42,11 +43,13 @@ public class HospitalServiceImpl implements HospitalService {
             hospital.setCreateTime(targetHospital.getCreateTime());
             hospital.setUpdateTime(new Date());
             hospital.setIsDeleted(0);
+            hospital.setStatus(0);
             hospitalRepository.save(hospital);
         }else{
             hospital.setUpdateTime(new Date());
             hospital.setCreateTime(new Date());
             hospital.setIsDeleted(0);
+            hospital.setStatus(0);
             hospitalRepository.save(hospital);
         }
 
@@ -84,7 +87,44 @@ public class HospitalServiceImpl implements HospitalService {
         return pages;
     }
 
-    private void setMessage(Hospital hospital) {
+    // 更新上线状态
+    @Override
+    public void updateStatus(String id, Integer status) {
+        // 状态合法性判断
+        if(status.intValue() == 0 || status.intValue() == 1) {
+            // 根据id查询出数据
+            Hospital hospital = hospitalRepository.findById(id).get();
+            // 更新状态信息
+            hospital.setStatus(status);
+            hospital.setUpdateTime(new Date());
+            // 重新保存起来
+            hospitalRepository.save(hospital);
+        }
+    }
+    @Override
+    public Map<String, Object> show(String id) {
+        Map<String, Object> result = new HashMap<>();
+
+        Hospital hospital = this.setMessage(hospitalRepository.getHospitalById(id));
+        result.put("hospital", hospital);
+
+        //单独处理更直观
+        result.put("bookingRule", hospital.getBookingRule());
+        //不需要重复返回
+        hospital.setBookingRule(null);
+        return result;
+    }
+
+    @Override
+    public String getHospName(String hoscode) {
+        Hospital hospital = hospitalRepository.getHospitalByHoscode(hoscode);
+        if (hospital != null){
+            return hospital.getHosname();
+        }
+        return null;
+    }
+
+    private Hospital setMessage(Hospital hospital) {
         // 调用远程接口获得对应的医院等级
         String hostypeString = dictFeignClient.getName(DictEnum.HOSTYPE.getDictCode(), hospital.getHostype());
         String provinceString = dictFeignClient.getName(hospital.getProvinceCode());
@@ -93,6 +133,7 @@ public class HospitalServiceImpl implements HospitalService {
         Map<String, Object> params = hospital.getParams();
         params.put("hostypeString",hostypeString);
         params.put("fullAddress", provinceString + cityString + districtString);
+        return  hospital;
     }
 }
 
