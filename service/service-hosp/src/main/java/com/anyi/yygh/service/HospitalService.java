@@ -4,6 +4,8 @@ import com.anyi.yygh.model.hosp.Hospital;
 import com.anyi.yygh.vo.hosp.HospitalQueryVo;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 /**
  * @author 安逸i
  * @version 1.0
@@ -21,4 +23,6 @@ public interface HospitalService {
     Object show(String id);
 
     String getHospName(String hoscode);
+
+    List<Hospital> findByHosname(String hosname);
 }

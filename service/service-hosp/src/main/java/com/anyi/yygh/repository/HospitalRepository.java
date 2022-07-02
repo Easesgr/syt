@@ -4,6 +4,8 @@ import com.anyi.yygh.model.hosp.Hospital;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author 安逸i
  * @version 1.0
@@ -13,4 +15,6 @@ public interface HospitalRepository extends MongoRepository<Hospital,String> {
     Hospital getHospitalByHoscode(String hoscode);
 
     Hospital getHospitalById(String id);
+
+    List<Hospital> findHospitalByHosnameLike(String hosname);
 }

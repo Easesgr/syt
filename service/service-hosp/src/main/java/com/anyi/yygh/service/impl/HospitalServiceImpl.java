@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -124,13 +125,23 @@ public class HospitalServiceImpl implements HospitalService {
         return null;
     }
 
+    /**
+     * 医院模糊查询
+     * @param hosname
+     * @return
+     */
+    @Override
+    public List<Hospital> findByHosname(String hosname) {
+        return hospitalRepository.findHospitalByHosnameLike(hosname);
+    }
+
     private Hospital setMessage(Hospital hospital) {
         // 调用远程接口获得对应的医院等级
         String hostypeString = dictFeignClient.getName(DictEnum.HOSTYPE.getDictCode(), hospital.getHostype());
         String provinceString = dictFeignClient.getName(hospital.getProvinceCode());
         String cityString = dictFeignClient.getName(hospital.getCityCode());
         String districtString = dictFeignClient.getName(hospital.getDistrictCode());
-        Map<String, Object> params = hospital.getParams();
+        Map<String, Object> params = hospital.getParam();
         params.put("hostypeString",hostypeString);
         params.put("fullAddress", provinceString + cityString + districtString);
         return  hospital;

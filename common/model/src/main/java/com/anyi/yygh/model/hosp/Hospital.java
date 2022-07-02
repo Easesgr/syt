@@ -67,7 +67,7 @@ public class Hospital extends BaseMongoEntity {
 	@ApiModelProperty(value = "预约规则")
 	private BookingRule bookingRule;
 
-	private Map<String ,Object> params = new HashMap<>();
+	private Map<String ,Object> param = new HashMap<>();
 
 	public void setBookingRule(String bookingRule) {
 		this.bookingRule = JSONObject.parseObject(bookingRule, BookingRule.class);
