@@ -23,14 +23,14 @@ spring:
       discovery:
         server-addr: localhost:8848 # nacos服务地址
   rabbitmq:
-    host: 119.91.237.21
+    host: 111.91.237.21
     port: 5673
     username: guest
     password: guest
 tencent:
   sms:
-    secretId: AKIDa0B7nEQM3UgfPu99tOddNs77rMbbMr66
-    secretKey: mKdgU2LOBj14sQilY5NPBiz1nKbdPva0
-    sdkAppId: 1400684835
-    templateId: 1416184
-    signName: 安逸i个人网站
+    secretId: 111
+    secretKey: 111
+    sdkAppId: 111
+    templateId: 11
+    signName: 11
