@@ -135,6 +135,20 @@ public class HospitalServiceImpl implements HospitalService {
         return hospitalRepository.findHospitalByHosnameLike(hosname);
     }
 
+    @Override
+    public Map<String, Object> item(String hoscode) {
+        Map<String, Object> result = new HashMap<>();
+
+        Hospital hospital = this.setMessage(hospitalRepository.getHospitalByHoscode(hoscode));
+        result.put("hospital", hospital);
+
+        //单独处理更直观
+        result.put("bookingRule", hospital.getBookingRule());
+        //不需要重复返回
+        hospital.setBookingRule(null);
+        return result;
+    }
+
     private Hospital setMessage(Hospital hospital) {
         // 调用远程接口获得对应的医院等级
         String hostypeString = dictFeignClient.getName(DictEnum.HOSTYPE.getDictCode(), hospital.getHostype());

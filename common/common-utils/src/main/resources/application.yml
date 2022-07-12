@@ -1,0 +1,3 @@
+myJwt:
+  secretKey: 196174
+  tokenExpiration: 24*60*60*1000

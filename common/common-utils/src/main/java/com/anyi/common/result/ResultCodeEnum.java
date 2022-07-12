@@ -18,7 +18,8 @@ public enum ResultCodeEnum {
     LOGIN_AUTH(208, "未登陆"),
     PERMISSION(209, "没有权限"),
 
-    CODE_ERROR(210, "验证码错误"),
+    CODE_ERROR(210, "验证码错误或验证码已失效"),
+    CODE_Send_ERROR(211, "发送验证码失败"),
 //    LOGIN_MOBLE_ERROR(211, "账号不正确"),
     LOGIN_DISABLED_ERROR(212, "改用户已被禁用"),
     REGISTER_MOBLE_ERROR(213, "手机号已被使用"),
